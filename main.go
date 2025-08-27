@@ -1,8 +1,10 @@
 package main
 
 import (
+    "embed"
     "flag"
     "fmt"
+    "io/fs"
     "log"
     "net/http"
     "os"
@@ -10,6 +12,9 @@ import (
     "netron/handlers"
     "github.com/gorilla/mux"
 )
+
+//go:embed static/*
+var staticFiles embed.FS
 
 func main() {
     run := flag.Bool("run", false, "Run the server")
@@ -28,7 +33,12 @@ func main() {
     r.HandleFunc("/api/system", handlers.GetSystemInfo).Methods("GET")
     r.HandleFunc("/api/speedtest", handlers.GetSpeedTest).Methods("GET")
     r.HandleFunc("/api/speedtest/start", handlers.StartSpeedTest).Methods("POST")
-    r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
+    
+    staticFS, err := fs.Sub(staticFiles, "static")
+    if err != nil {
+        log.Fatal(err)
+    }
+    r.PathPrefix("/").Handler(http.FileServer(http.FS(staticFS)))
 
     fmt.Printf("Server starting on :%s\n", *port)
     log.Fatal(http.ListenAndServe(":"+*port, r))

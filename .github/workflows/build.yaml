@@ -60,9 +60,8 @@ jobs:
         GOARCH: ${{ matrix.goarch }}
         GOARM: ${{ matrix.goarm }}
       run: |
-        mkdir -p build/netron-${{ steps.version.outputs.VERSION }}-${{ matrix.suffix }}
-        cp -r static build/netron-${{ steps.version.outputs.VERSION }}-${{ matrix.suffix }}/
-        go build -ldflags="-s -w" -o build/netron-${{ steps.version.outputs.VERSION }}-${{ matrix.suffix }}/netron .
+        mkdir -p build
+        go build -ldflags="-s -w" -o build/netron-${{ steps.version.outputs.VERSION }}-${{ matrix.suffix }} .
 
     - name: Create archive
       run: |
