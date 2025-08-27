@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netron Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Netron System Monitor</h1>
+        </header>
+        
+        <div class="grid">
+            <div class="card large">
+                <h2>System Information</h2>
+                <div class="system-info">
+                    <div class="info-row">
+                        <span class="info-label">CPU Model:</span>
+                        <span class="info-value" id="cpu-model">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">CPU Cores:</span>
+                        <span class="info-value" id="cpu-cores-detailed">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">CPU Cache:</span>
+                        <span class="info-value" id="cpu-cache">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">AES-NI:</span>
+                        <span class="info-value" id="cpu-aes">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">VM-x/AMD-V:</span>
+                        <span class="info-value" id="cpu-vmx">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Total Disk:</span>
+                        <span class="info-value" id="total-disk">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">OS:</span>
+                        <span class="info-value" id="os-info">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Kernel:</span>
+                        <span class="info-value" id="kernel-info">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Arch:</span>
+                        <span class="info-value" id="arch-info">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Uptime:</span>
+                        <span class="info-value" id="uptime-info">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Load Average:</span>
+                        <span class="info-value" id="load-avg">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">TCP CC:</span>
+                        <span class="info-value" id="tcp-cc">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Virtualization:</span>
+                        <span class="info-value" id="virt-info">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">IPv4/IPv6:</span>
+                        <span class="info-value" id="ip-status">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Organization:</span>
+                        <span class="info-value" id="organization">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Location:</span>
+                        <span class="info-value" id="location">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>CPU Usage</h2>
+                <div class="metric">
+                    <span class="value" id="cpu-usage">0%</span>
+                    <span class="label">Usage</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Memory</h2>
+                <div class="metric">
+                    <span class="value" id="mem-percent">0%</span>
+                    <span class="label">Used</span>
+                </div>
+                <div class="metric">
+                    <span class="value" id="mem-used">0 GB</span>
+                    <span class="label">of</span>
+                    <span class="value" id="mem-total">0 GB</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Speed Test</h2>
+                <button id="speedtest-btn" class="speedtest-btn">Start Speed Test</button>
+                <div class="speedtest-results" id="speedtest-results">
+                    <div class="metric">
+                        <span class="value" id="download-speed">-</span>
+                        <span class="label">Mbps Down</span>
+                    </div>
+                    <div class="metric">
+                        <span class="value" id="upload-speed">-</span>
+                        <span class="label">Mbps Up</span>
+                    </div>
+                    <div class="metric">
+                        <span class="value" id="ping-time">-</span>
+                        <span class="label">ms Ping</span>
+                    </div>
+                    <div class="server-info" id="server-info"></div>
+                    <div class="last-updated" id="last-updated"></div>
+                </div>
+            </div>
+
+            <div class="card large">
+                <h2>Top Processes</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>Name</th>
+                                <th>CPU</th>
+                                <th>Memory</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="processes-table">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card large">
+                <h2>Network Interfaces</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Interface</th>
+                                <th>Sent</th>
+                                <th>Received</th>
+                                <th>Speed</th>
+                            </tr>
+                        </thead>
+                        <tbody id="interfaces-table">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card large">
+                <h2>TCP Connections</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Local</th>
+                                <th>Remote</th>
+                                <th>Status</th>
+                                <th>PID</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tcp-table">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card large">
+                <h2>UDP Connections</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Local</th>
+                                <th>Remote</th>
+                                <th>Status</th>
+                                <th>PID</th>
+                            </tr>
+                        </thead>
+                        <tbody id="udp-table">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
