@@ -64,6 +64,9 @@ class Dashboard {
         this.updateInterfaces(network.interfaces);
         this.updateConnections(network.tcp, 'tcp-table');
         this.updateConnections(network.udp, 'udp-table');
+        
+        document.getElementById('tcp-count').textContent = network.tcp_count || 0;
+        document.getElementById('udp-count').textContent = network.udp_count || 0;
     }
 
     updateInterfaces(interfaces) {

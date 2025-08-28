@@ -55,6 +55,8 @@ type NetworkInfo struct {
     Interfaces []InterfaceInfo `json:"interfaces"`
     TCP        []Connection    `json:"tcp"`
     UDP        []Connection    `json:"udp"`
+    TCPCount   int             `json:"tcp_count"`
+    UDPCount   int             `json:"udp_count"`
 }
 
 type InterfaceInfo struct {

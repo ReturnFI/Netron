@@ -12,10 +12,15 @@ import (
 )
 
 func getNetworkInfo() models.NetworkInfo {
+    tcp := getTCPConnections()
+    udp := getUDPConnections()
+    
     return models.NetworkInfo{
         Interfaces: getInterfaces(),
-        TCP:        getTCPConnections(),
-        UDP:        getUDPConnections(),
+        TCP:        tcp,
+        UDP:        udp,
+        TCPCount:   len(tcp),
+        UDPCount:   len(udp),
     }
 }
 
@@ -106,10 +111,6 @@ func getConnections(path string) []models.Connection {
             Status:     status,
             PID:        pid,
         })
-
-        if len(connections) >= 50 {
-            break
-        }
     }
 
     return connections
