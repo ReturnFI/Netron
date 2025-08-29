@@ -80,7 +80,7 @@ jobs:
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     
     steps:
-    - uses: actions/checkout@vv4
+    - uses: actions/checkout@v4
     
     - name: Get version
       id: version
