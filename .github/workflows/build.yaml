@@ -61,12 +61,12 @@ jobs:
         GOARM: ${{ matrix.goarm }}
       run: |
         mkdir -p build
-        go build -ldflags="-s -w" -o build/netron-${{ steps.version.outputs.VERSION }}-${{ matrix.suffix }} .
+        go build -ldflags="-s -w" -o build/netron .
 
     - name: Create archive
       run: |
         cd build
-        tar -czf netron-${{ steps.version.outputs.VERSION }}-${{ matrix.suffix }}.tar.gz netron-${{ steps.version.outputs.VERSION }}-${{ matrix.suffix }}
+        tar -czf netron-${{ steps.version.outputs.VERSION }}-${{ matrix.suffix }}.tar.gz netron
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
@@ -80,7 +80,7 @@ jobs:
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@vv4
     
     - name: Get version
       id: version
