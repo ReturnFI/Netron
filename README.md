@@ -8,27 +8,7 @@ A lightweight web-based system monitoring dashboard for Linux servers.
 
 **For AMD64/x86_64 (most common):**
 ```bash
-wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.4-linux-amd64.tar.gz
-```
-
-**For ARM64 (Raspberry Pi 4, Apple Silicon servers):**
-```bash
-wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.4-linux-arm64.tar.gz
-```
-
-**For ARMv7 (Raspberry Pi 3):**
-```bash
-wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.4-linux-armv7.tar.gz
-```
-
-**For ARMv6 (Raspberry Pi Zero):**
-```bash
-wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.4-linux-armv6.tar.gz
-```
-
-**For 32-bit x86:**
-```bash
-wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.4-linux-i386.tar.gz
+wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.6-linux-amd64.tar.gz
 ```
 
 ### 2. Extract
@@ -40,7 +20,7 @@ tar -xzf netron-*-linux-*.tar.gz
 ### 3. Run
 
 ```bash
-./netron-*-linux-* --run
+./netron --run
 ```
 
 ### 4. Access
@@ -51,10 +31,10 @@ Open your browser: **http://your-server-ip:8080**
 
 ```bash
 # Use port 3000
-./netron-*-linux-* --run -p 3000
+./netron --run -p 3000
 
 # Use port 9090
-./netron-*-linux-* --run --port 9090
+./netron --run --port 9090
 ```
 
 ## Features
@@ -68,7 +48,7 @@ Open your browser: **http://your-server-ip:8080**
 ## One-line Install
 
 ```bash
-wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.4-linux-amd64.tar.gz && tar -xzf netron-*-linux-*.tar.gz && ./netron-*-linux-* --run
+wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.4-linux-amd64.tar.gz && tar -xzf netron-*-linux-*.tar.gz && ./netron --run
 ```
 
 ## Architecture Guide
