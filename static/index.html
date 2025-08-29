@@ -13,131 +13,98 @@
         </header>
         
         <div class="grid">
-            <div class="card large">
+            <div class="card" id="system-info-card">
                 <h2>System Information</h2>
                 <div class="system-info">
-                    <div class="info-row">
-                        <span class="info-label">CPU Model:</span>
-                        <span class="info-value" id="cpu-model">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">CPU Cores:</span>
-                        <span class="info-value" id="cpu-cores-detailed">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">CPU Cache:</span>
-                        <span class="info-value" id="cpu-cache">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">AES-NI:</span>
-                        <span class="info-value" id="cpu-aes">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">VM-x/AMD-V:</span>
-                        <span class="info-value" id="cpu-vmx">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Total Disk:</span>
-                        <span class="info-value" id="total-disk">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">OS:</span>
-                        <span class="info-value" id="os-info">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Kernel:</span>
-                        <span class="info-value" id="kernel-info">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Arch:</span>
-                        <span class="info-value" id="arch-info">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Uptime:</span>
-                        <span class="info-value" id="uptime-info">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Load Average:</span>
-                        <span class="info-value" id="load-avg">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">TCP CC:</span>
-                        <span class="info-value" id="tcp-cc">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Virtualization:</span>
-                        <span class="info-value" id="virt-info">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">IPv4/IPv6:</span>
-                        <span class="info-value" id="ip-status">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Organization:</span>
-                        <span class="info-value" id="organization">-</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Location:</span>
-                        <span class="info-value" id="location">-</span>
-                    </div>
+                    <div class="info-row"><span class="info-label">OS</span><span class="info-value" id="os-info">-</span></div>
+                    <div class="info-row"><span class="info-label">Arch</span><span class="info-value" id="arch-info">-</span></div>
+                    <div class="info-row"><span class="info-label">Kernel</span><span class="info-value" id="kernel-info">-</span></div>
+                    <div class="info-row"><span class="info-label">Uptime</span><span class="info-value" id="uptime-info">-</span></div>
+                    <div class="info-row"><span class="info-label">Load Average</span><span class="info-value" id="load-avg">-</span></div>
+                    <div class="info-row"><span class="info-label">TCP CC</span><span class="info-value" id="tcp-cc">-</span></div>
+                    <div class="info-row"><span class="info-label">Virtualization</span><span class="info-value" id="virt-info">-</span></div>
+                    <div class="info-row"><span class="info-label">IPv4/IPv6</span><span class="info-value" id="ip-status">-</span></div>
+                    <div class="info-row"><span class="info-label">Organization</span><span class="info-value" id="organization">-</span></div>
+                    <div class="info-row"><span class="info-label">Location</span><span class="info-value" id="location">-</span></div>
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" id="cpu-info-card">
+                <h2>CPU Details</h2>
+                <div class="system-info">
+                    <div class="info-row"><span class="info-label">Model</span><span class="info-value" id="cpu-model">-</span></div>
+                    <div class="info-row"><span class="info-label">Cores</span><span class="info-value" id="cpu-cores-detailed">-</span></div>
+                    <div class="info-row"><span class="info-label">Cache</span><span class="info-value" id="cpu-cache">-</span></div>
+                    <div class="info-row"><span class="info-label">AES-NI</span><span class="info-value" id="cpu-aes">-</span></div>
+                    <div class="info-row"><span class="info-label">VM-x/AMD-V</span><span class="info-value" id="cpu-vmx">-</span></div>
+                </div>
+            </div>
+
+            <div class="card" id="cpu-usage-card">
                 <h2>CPU Usage</h2>
-                <div class="metric">
+                <div class="metric-main">
                     <span class="value" id="cpu-usage">0%</span>
-                    <span class="label">Usage</span>
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" id="memory-card">
                 <h2>Memory</h2>
-                <div class="metric">
+                <div class="metric-main">
                     <span class="value" id="mem-percent">0%</span>
-                    <span class="label">Used</span>
                 </div>
-                <div class="metric">
-                    <span class="value" id="mem-used">0 GB</span>
-                    <span class="label">of</span>
-                    <span class="value" id="mem-total">0 GB</span>
+                <div class="metric-sub">
+                    <span id="mem-used">0 GB</span> / <span id="mem-total">0 GB</span>
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" id="disk-card">
+                <h2>Disk</h2>
+                <div class="metric-main">
+                    <span class="value" id="used-disk-percent">-</span>
+                </div>
+                 <div class="metric-sub">
+                    <span id="total-disk">-</span>
+                </div>
+            </div>
+
+            <div class="card" id="network-card">
+                <h2>Network Connections</h2>
+                <div class="metric-split">
+                    <div>
+                        <span class="value" id="tcp-count">0</span>
+                        <span class="label">TCP</span>
+                    </div>
+                    <div>
+                        <span class="value" id="udp-count">0</span>
+                        <span class="label">UDP</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="speedtest-card">
                 <h2>Speed Test</h2>
                 <button id="speedtest-btn" class="speedtest-btn">Start Speed Test</button>
                 <div class="speedtest-results" id="speedtest-results">
-                    <div class="metric">
-                        <span class="value" id="download-speed">-</span>
-                        <span class="label">Mbps Down</span>
-                    </div>
-                    <div class="metric">
-                        <span class="value" id="upload-speed">-</span>
-                        <span class="label">Mbps Up</span>
-                    </div>
-                    <div class="metric">
-                        <span class="value" id="ping-time">-</span>
-                        <span class="label">ms Ping</span>
+                    <div class="metric-split">
+                        <div>
+                            <span class="value" id="download-speed">-</span>
+                            <span class="label">Down (Mbps)</span>
+                        </div>
+                        <div>
+                            <span class="value" id="upload-speed">-</span>
+                            <span class="label">Up (Mbps)</span>
+                        </div>
+                        <div>
+                            <span class="value" id="ping-time">-</span>
+                            <span class="label">Ping (ms)</span>
+                        </div>
                     </div>
                     <div class="server-info" id="server-info"></div>
                     <div class="last-updated" id="last-updated"></div>
                 </div>
             </div>
-
-            <div class="card">
-                <h2>Network</h2>
-                <div class="metric">
-                    <span class="value" id="tcp-count">0</span>
-                    <span class="label">TCP Connections</span>
-                </div>
-                <div class="metric">
-                    <span class="value" id="udp-count">0</span>
-                    <span class="label">UDP Connections</span>
-                </div>
-            </div>
-
-            <div class="card large">
+            
+            <div class="card large" id="processes-card">
                 <h2>Top Processes</h2>
                 <div class="table-container">
                     <table>
@@ -156,7 +123,7 @@
                 </div>
             </div>
 
-            <div class="card large">
+            <div class="card large" id="interfaces-card">
                 <h2>Network Interfaces</h2>
                 <div class="table-container">
                     <table>
@@ -174,7 +141,7 @@
                 </div>
             </div>
 
-            <div class="card large">
+            <div class="card large" id="tcp-conn-card">
                 <h2>TCP Connections</h2>
                 <div class="table-container">
                     <table>
@@ -192,7 +159,7 @@
                 </div>
             </div>
 
-            <div class="card large">
+            <div class="card large" id="udp-conn-card">
                 <h2>UDP Connections</h2>
                 <div class="table-container">
                     <table>
@@ -211,7 +178,6 @@
             </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

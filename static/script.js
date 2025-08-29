@@ -168,30 +168,35 @@ class Dashboard {
         document.getElementById('server-info').textContent = 
             speedtest.server || '';
         document.getElementById('last-updated').textContent = 
-            speedtest.last_updated ? `Last updated: ${speedtest.last_updated}` : '';
+            speedtest.last_updated ? `Last updated: ${new Date(speedtest.last_updated).toLocaleString()}` : '';
     }
 
     updateSystemInfo(system, cpu) {
-        document.getElementById('cpu-model').textContent = cpu.model || 'Unknown';
+        document.getElementById('cpu-model').textContent = cpu.model || '-';
         document.getElementById('cpu-cores-detailed').textContent = 
             cpu.frequency ? `${cpu.cores} @ ${cpu.frequency}` : `${cpu.cores}`;
-        document.getElementById('cpu-cache').textContent = cpu.cache || 'Unknown';
+        document.getElementById('cpu-cache').textContent = cpu.cache || '-';
         document.getElementById('cpu-aes').textContent = cpu.aes ? '✓ Enabled' : '✗ Disabled';
         document.getElementById('cpu-vmx').textContent = cpu.vmx ? '✓ Enabled' : '✗ Disabled';
         
-        document.getElementById('total-disk').textContent = 
-            `${system.total_disk} (${system.used_disk} Used)`;
-        document.getElementById('os-info').textContent = system.os || 'Unknown';
-        document.getElementById('kernel-info').textContent = system.kernel || 'Unknown';
-        document.getElementById('arch-info').textContent = system.arch || 'Unknown';
-        document.getElementById('uptime-info').textContent = system.uptime || 'Unknown';
-        document.getElementById('load-avg').textContent = system.load_average || 'Unknown';
-        document.getElementById('tcp-cc').textContent = system.tcp_cc || 'Unknown';
-        document.getElementById('virt-info').textContent = system.virtualization || 'Unknown';
+        const usedDisk = parseFloat(system.used_disk.replace(/[^0-9.]/g, ''));
+        const totalDisk = parseFloat(system.total_disk.replace(/[^0-9.]/g, ''));
+        const usedDiskPercent = totalDisk > 0 ? ((usedDisk / totalDisk) * 100).toFixed(1) + '%' : '0%';
+        
+        document.getElementById('used-disk-percent').textContent = usedDiskPercent;
+        document.getElementById('total-disk').textContent = `${system.used_disk} / ${system.total_disk}`;
+        
+        document.getElementById('os-info').textContent = system.os || '-';
+        document.getElementById('kernel-info').textContent = system.kernel || '-';
+        document.getElementById('arch-info').textContent = system.arch || '-';
+        document.getElementById('uptime-info').textContent = system.uptime || '-';
+        document.getElementById('load-avg').textContent = system.load_average || '-';
+        document.getElementById('tcp-cc').textContent = system.tcp_cc || '-';
+        document.getElementById('virt-info').textContent = system.virtualization || '-';
         document.getElementById('ip-status').textContent = 
             `${system.ipv4_status} / ${system.ipv6_status}`;
-        document.getElementById('organization').textContent = system.organization || 'Unknown';
-        document.getElementById('location').textContent = system.location || 'Unknown';
+        document.getElementById('organization').textContent = system.organization || '-';
+        document.getElementById('location').textContent = system.location || '-';
     }
 }
 
