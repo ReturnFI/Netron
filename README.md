@@ -48,7 +48,7 @@ Open your browser: **http://your-server-ip:8080**
 ## One-line Install
 
 ```bash
-wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.4-linux-amd64.tar.gz && tar -xzf netron-*-linux-*.tar.gz && ./netron --run
+wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.6-linux-amd64.tar.gz && tar -xzf netron-*-linux-*.tar.gz && ./netron --run
 ```
 
 ## Architecture Guide
@@ -66,16 +66,7 @@ uname -m
 - `armv6l` → use `linux-armv6`
 - `i386` or `i686` → use `linux-i386`
 
-## Optional: Install Speed Test
 
-For internet speed testing feature:
-```bash
-# Ubuntu/Debian
-apt update && apt install speedtest-cli
-
-# CentOS/RHEL
-yum install speedtest-cli
-```
 
 ## That's it! 🎉
 
