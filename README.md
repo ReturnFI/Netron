@@ -11,7 +11,7 @@ A lightweight web-based system monitoring dashboard for Linux servers.
 ### One-line Install
 
 ```bash
-wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.6-linux-amd64.tar.gz && tar -xzf netron-*-linux-*.tar.gz && ./netron --run
+wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.7-linux-amd64.tar.gz && tar -xzf netron-*-linux-*.tar.gz && ./netron --run
 ```
 
 
@@ -21,7 +21,7 @@ wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.6-li
 
 **For AMD64/x86_64 (most common):**
 ```bash
-wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.6-linux-amd64.tar.gz
+wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.7-linux-amd64.tar.gz
 ```
 
 ### 2. Extract
