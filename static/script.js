@@ -1,3 +1,28 @@
+document.addEventListener('DOMContentLoaded', () => {
+    new Dashboard();
+
+    const themeToggle = document.getElementById('theme-toggle');
+
+    const setTheme = (theme) => {
+        localStorage.setItem('theme', theme);
+        document.body.setAttribute('data-theme', theme);
+        themeToggle.checked = theme === 'light';
+    };
+
+    themeToggle.addEventListener('change', (e) => {
+        setTheme(e.target.checked ? 'light' : 'dark');
+    });
+    
+    const savedTheme = localStorage.getItem('theme');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else if (prefersLight) {
+        setTheme('light');
+    }
+});
+
 class Dashboard {
     constructor() {
         this.init();
@@ -199,7 +224,3 @@ class Dashboard {
         document.getElementById('location').textContent = system.location || '-';
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    new Dashboard();
-});

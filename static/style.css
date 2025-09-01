@@ -1,11 +1,28 @@
 :root {
-    --primary-glow: #00ff88;
+    --primary-color: #00ff88;
+    --primary-glow: rgba(0, 255, 136, 0.4);
     --background-color: #0a0a0a;
     --card-background: rgba(26, 26, 26, 0.6);
     --border-color: rgba(68, 68, 68, 0.5);
+    --shadow-color: rgba(0, 0, 0, 0.37);
     --text-primary: #e0e0e0;
     --text-secondary: #9e9e9e;
     --font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --table-header-bg: rgba(0, 255, 136, 0.05);
+    --table-hover-bg: rgba(255, 255, 255, 0.03);
+}
+
+body[data-theme="light"] {
+    --primary-color: #009688;
+    --primary-glow: rgba(0, 150, 136, 0.2);
+    --background-color: #f4f7f9;
+    --card-background: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --text-primary: #212121;
+    --text-secondary: #757575;
+    --table-header-bg: #f2f2f2;
+    --table-hover-bg: #f9f9f9;
 }
 
 * {
@@ -17,142 +34,383 @@
 body {
     font-family: var(--font-family);
     background-color: var(--background-color);
-    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
-    background-size: 20px 20px;
     color: var(--text-primary);
     line-height: 1.6;
+    transition: background-color 0.3s ease;
+    min-height: 100vh;
+}
+
+body[data-theme="dark"] {
+    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-size: 20px 20px;
 }
 
 .container {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 20px;
+    padding: min(5vw, 20px);
+    width: 100%;
 }
 
 header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: clamp(20px, 5vw, 40px);
+    position: relative;
 }
 
 header h1 {
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
     font-weight: 700;
-    color: var(--primary-glow);
-    text-shadow: 0 0 15px rgba(0, 255, 136, 0.4), 0 0 25px rgba(0, 255, 136, 0.2);
+    color: var(--primary-color);
+    text-shadow: 0 0 15px var(--primary-glow);
+    word-break: break-word;
 }
 
 .grid {
     display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(150px, auto);
-    grid-template-areas:
-        "sysinfo cpuinfo speedtest speedtest"
-        "cpu mem disk network"
-        "proc proc iface iface"
-        "tcp tcp udp udp";
+    gap: clamp(15px, 3vw, 20px);
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-areas:
+            "sysinfo cpuinfo speedtest speedtest"
+            "cpu mem disk network"
+            "proc proc iface iface"
+            "tcp tcp udp udp";
+    }
+
+    #system-info-card { grid-area: sysinfo; }
+    #cpu-info-card { grid-area: cpuinfo; }
+    #cpu-usage-card { grid-area: cpu; }
+    #memory-card { grid-area: mem; }
+    #disk-card { grid-area: disk; }
+    #network-card { grid-area: network; }
+    #speedtest-card { grid-area: speedtest; }
+    #processes-card { grid-area: proc; }
+    #interfaces-card { grid-area: iface; }
+    #tcp-conn-card { grid-area: tcp; }
+    #udp-conn-card { grid-area: udp; }
 }
 
 .card {
     background: var(--card-background);
     border: 1px solid var(--border-color);
     border-radius: 16px;
-    padding: 25px;
+    padding: clamp(15px, 4vw, 25px);
+    box-shadow: 0 8px 32px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    min-height: fit-content;
+    width: 100%;
+    overflow: hidden;
+}
+
+body[data-theme="dark"] .card {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    border-color: rgba(0, 255, 136, 0.5);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    border-color: var(--primary-color);
 }
 
-#system-info-card { grid-area: sysinfo; }
-#cpu-info-card { grid-area: cpuinfo; }
-#cpu-usage-card { grid-area: cpu; }
-#memory-card { grid-area: mem; }
-#disk-card { grid-area: disk; }
-#network-card { grid-area: network; }
-#speedtest-card { grid-area: speedtest; }
-#processes-card { grid-area: proc; }
-#interfaces-card { grid-area: iface; }
-#tcp-conn-card { grid-area: tcp; }
-#udp-conn-card { grid-area: udp; }
+h2 {
+    color: var(--primary-color);
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    margin-bottom: 15px;
+    word-break: break-word;
+}
 
-.metric-main { text-align: center; margin-bottom: 10px; }
-.metric-main .value { font-size: 3rem; font-weight: 700; color: var(--text-primary); }
-.metric-sub { text-align: center; color: var(--text-secondary); }
-.metric-split { display: flex; justify-content: space-around; text-align: center; }
-.metric-split .value { font-size: 2rem; font-weight: 600; display: block; }
-.metric-split .label { color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; }
+.metric-main { 
+    text-align: center; 
+    margin-bottom: 10px; 
+}
 
-.table-container { max-height: 250px; overflow-y: auto; overflow-x: hidden; }
-table { width: 100%; border-collapse: collapse; }
-th, td { padding: 10px 15px; text-align: left; border-bottom: 1px solid var(--border-color); white-space: nowrap; }
-th { background-color: rgba(0, 255, 136, 0.05); color: var(--primary-glow); position: sticky; top: 0; backdrop-filter: blur(5px); }
-tr:hover { background-color: rgba(255, 255, 255, 0.03); }
-td { color: var(--text-secondary); font-size: 0.9rem; }
-td:first-child { color: var(--text-primary); }
-.table-container::-webkit-scrollbar { width: 8px; }
-.table-container::-webkit-scrollbar-track { background: transparent; }
-.table-container::-webkit-scrollbar-thumb { background: var(--primary-glow); border-radius: 4px; }
+.metric-main .value { 
+    font-size: clamp(2rem, 8vw, 3rem); 
+    font-weight: 700; 
+    word-break: break-all;
+}
 
-.speedtest-btn { background: var(--primary-glow); color: #000; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 15px; transition: all 0.3s ease; width: 100%; }
-.speedtest-btn:hover:not(:disabled) { transform: scale(1.03); box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3); }
-.speedtest-btn:disabled { background: #444; color: #888; cursor: not-allowed; }
-.server-info, .last-updated { font-size: 0.8rem; color: var(--text-secondary); margin-top: 10px; text-align: center; }
+.metric-sub { 
+    text-align: center; 
+    color: var(--text-secondary); 
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    word-break: break-word;
+}
 
-.system-info { display: flex; flex-direction: column; gap: 8px; }
-.info-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border-color); }
-.info-row:last-child { border-bottom: none; }
-.info-label { color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; }
-.info-value { color: var(--text-primary); font-size: 0.9rem; font-weight: 500; text-align: right; }
+.metric-split { 
+    display: flex; 
+    justify-content: space-around; 
+    text-align: center; 
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
-@media (max-width: 1200px) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-areas:
-            "sysinfo cpuinfo"
-            "speedtest speedtest"
-            "cpu mem"
-            "disk network"
-            "proc proc"
-            "iface iface"
-            "tcp tcp"
-            "udp udp";
+.metric-split > div {
+    flex: 1;
+    min-width: 80px;
+}
+
+.metric-split .value { 
+    font-size: clamp(1.5rem, 5vw, 2rem); 
+    font-weight: 600; 
+    display: block; 
+    word-break: break-all;
+}
+
+.metric-split .label { 
+    color: var(--text-secondary); 
+    font-size: clamp(0.7rem, 2vw, 0.8rem); 
+    text-transform: uppercase; 
+}
+
+.table-container { 
+    max-height: min(50vh, 300px); 
+    overflow: auto; 
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse;
+    min-width: 400px;
+}
+
+th, td { 
+    padding: clamp(8px, 2vw, 12px); 
+    text-align: left; 
+    border-bottom: 1px solid var(--border-color); 
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
+    word-break: break-word;
+    hyphens: auto;
+}
+
+th { 
+    background-color: var(--table-header-bg); 
+    color: var(--primary-color); 
+    position: sticky; 
+    top: 0; 
+    z-index: 1;
+}
+
+body[data-theme="dark"] th { 
+    backdrop-filter: blur(5px); 
+}
+
+tr:hover { 
+    background-color: var(--table-hover-bg); 
+}
+
+td { 
+    color: var(--text-secondary); 
+}
+
+td:first-child { 
+    color: var(--text-primary); 
+}
+
+.table-container::-webkit-scrollbar { 
+    width: 8px; 
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track { 
+    background: transparent; 
+}
+
+.table-container::-webkit-scrollbar-thumb { 
+    background: var(--primary-color); 
+    border-radius: 4px; 
+}
+
+.speedtest-btn { 
+    background: var(--primary-color); 
+    color: var(--background-color); 
+    border: none; 
+    padding: clamp(10px, 3vw, 12px) clamp(20px, 5vw, 24px); 
+    border-radius: 8px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    margin-bottom: 15px; 
+    transition: all 0.3s ease; 
+    width: 100%;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.speedtest-btn:hover:not(:disabled) { 
+    transform: scale(1.03); 
+    box-shadow: 0 5px 20px var(--primary-glow); 
+}
+
+.speedtest-btn:disabled { 
+    background: #444; 
+    color: #888; 
+    cursor: not-allowed; 
+}
+
+.server-info, .last-updated { 
+    font-size: clamp(0.7rem, 2vw, 0.8rem); 
+    color: var(--text-secondary); 
+    margin-top: 10px; 
+    text-align: center; 
+    word-break: break-word;
+}
+
+.system-info { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+
+.info-row { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    padding: 5px 0; 
+    border-bottom: 1px solid var(--border-color);
+    gap: 10px;
+}
+
+.info-row:last-child { 
+    border-bottom: none; 
+}
+
+.info-label { 
+    color: var(--text-secondary); 
+    font-weight: 500; 
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    flex-shrink: 0;
+    min-width: 30%;
+}
+
+.info-value { 
+    color: var(--text-primary); 
+    font-size: clamp(0.8rem, 2vw, 0.9rem); 
+    font-weight: 500; 
+    text-align: right;
+    word-break: break-word;
+    hyphens: auto;
+    flex-grow: 1;
+}
+
+.theme-switch-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #3c3c3c;
+    transition: .4s;
+    border-radius: 26px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "🌙";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #222;
+    transition: .4s;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+    content: "☀️";
+    background-color: white;
+}
+
+@media (max-width: 480px) {
+    .container { 
+        padding: 10px; 
+    }
+    
+    .metric-split {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .metric-split > div {
+        min-width: unset;
+    }
+    
+    .table-container {
+        max-height: 40vh;
+    }
+    
+    table {
+        min-width: 350px;
+    }
+    
+    th, td {
+        padding: 6px 8px;
+    }
+    
+    .theme-switch-wrapper {
+        position: static;
+        margin-top: 10px;
+        text-align: center;
+    }
+    
+    header {
+        flex-direction: column;
+        align-items: center;
     }
 }
 
-@media (max-width: 768px) {
-    .grid {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "sysinfo"
-            "cpuinfo"
-            "cpu"
-            "mem"
-            "disk"
-            "network"
-            "speedtest"
-            "proc"
-            "iface"
-            "tcp"
-            "udp";
+@media (max-width: 320px) {
+    .metric-main .value {
+        font-size: 2rem;
     }
     
-    .container { padding: 15px; }
-    .card { padding: 20px; }
-
-    header h1 { font-size: 2.2rem; }
+    .metric-split .value {
+        font-size: 1.5rem;
+    }
     
-    .metric-main .value { font-size: 2.5rem; }
-    .metric-split .value { font-size: 1.8rem; }
-
-    .table-container { overflow-x: auto; }
-    .table-container::-webkit-scrollbar { height: 8px; }
-
-    th, td { padding: 8px 12px; font-size: 0.85rem; }
+    table {
+        min-width: 280px;
+    }
 }
