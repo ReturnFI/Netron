@@ -2,7 +2,20 @@
 
 A lightweight web-based system monitoring dashboard for Linux servers.
 
+<div align="center">
+<img width="680" height="692" alt="image" src="https://github.com/user-attachments/assets/37833e6f-856b-49d9-8ae3-3c34d55571c7" />
+</div>
+
 ## Quick Start
+
+### One-line Install
+
+```bash
+wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.6-linux-amd64.tar.gz && tar -xzf netron-*-linux-*.tar.gz && ./netron --run
+```
+
+
+## Manual 
 
 ### 1. Download
 
@@ -44,12 +57,6 @@ Open your browser: **http://your-server-ip:8080**
 - 🚀 **Speed Test** - Built-in internet speed testing
 - 💻 **System Information** - Hardware details, OS info, virtualization
 - 🎯 **Single Binary** - No dependencies, just download and run
-
-## One-line Install
-
-```bash
-wget https://github.com/ReturnFI/Netron/releases/latest/download/netron-0.0.6-linux-amd64.tar.gz && tar -xzf netron-*-linux-*.tar.gz && ./netron --run
-```
 
 ## Architecture Guide
 
